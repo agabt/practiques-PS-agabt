@@ -25,18 +25,29 @@ function comparar([string]$user_f, [string]$passwd_f) {
     
     # Extreim les dades del fitxer de text"
     $credentials = Get-Content -Path '/Users/anthony/Documentos/Code/practiques-PS-agabt/Scripts PS/Texts/AGT_Usuaris.txt'
+
     # Definim la variable de la verificació
     [bool]$login_success = $true
 
+    # Definim la variable per saber en quina posició del array està l'usuari
+    [string]$passwd_db = ""
+
     # Comparam si el usuari existeix en la base de dades que tenim en el document "AGT_Usuaris.txt"
-    foreach ($credential in $credentials) {
-        if ($credential -match $user_f) {
+    foreach ($line in $credentials) {
+        $user_cred = $line.Split(";")
+
+        if ($user_cred[0] -eq $user_f) {
+            $passwd_db = $user_cred[1]
             $login_success = $true
             break
-
+    
         } else {
             $login_success = $false
+    
+        }
 
+        if ($login_success) {
+            break
         }
     }
 
@@ -49,15 +60,12 @@ function comparar([string]$user_f, [string]$passwd_f) {
     }
 
     # Si l'usuari existeix hem de comprovar la contrasenya
-    foreach ($credential in $credentials) {
-        if ($credential -match $passwd_hash) {
-            $login_success = $true
-            break
+    if ($passwd_db -eq $passwd_hash) {
+        $login_success = $true
 
-        } else {
-            $login_success= $false
+    } else {
+        $login_success= $false
 
-        }
     }
 
     return $login_success

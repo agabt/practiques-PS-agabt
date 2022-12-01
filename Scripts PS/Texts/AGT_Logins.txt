@@ -1,0 +1,4 @@
+Inici de sessió correcte del usuari anthony a l'hora 2022-12-01 09:53:12
+Inici de sessió correcte del usuari pepe a l'hora 2022-12-01 09:55:06
+Prova d'inici de sessió incorrecta del usuari anthony a l'hora 2022-12-01 09:56:18
+Prova d'inici de sessió incorrecta del usuari anthony a l'hora 2022-12-01 09:57:19
